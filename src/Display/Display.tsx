@@ -16,6 +16,7 @@ import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 import { green } from '@mui/material/colors';
 import Box from '@mui/material/Box';
+import CardActions from '@mui/material/CardActions';
 
 interface DataToDisplay {
   assetName: string,
@@ -85,29 +86,31 @@ export default function Display(props: DataToDisplay) {
                   </List>
               </CardContent>
             </CardActionArea>
-						<Box sx={{ m: 1, position: 'relative', display: 'flex', justifyContent: 'right' }}>
-							<Button
-								variant="contained"
-								sx={buttonSx}
-								disabled={ props.loading }
-								onClick={ handleClickOnRefreshBtn }
-							>
-								Refresh
-								{props.loading && (
-									<CircularProgress
-										size={24}
-										sx={{
-											color: green[500],
-											position: 'absolute',
-											top: '50%',
-											left: '50%',
-											marginTop: '-12px',
-											marginLeft: '-15px',
-										}}
-									/>
-								)}
-							</Button>
-						</Box>
+						<CardActions>
+							<Box sx={{ m: 1, position: 'relative', display: 'flex', justifyContent: 'right' }}>
+								<Button
+									variant="contained"
+									sx={buttonSx}
+									disabled={ props.loading }
+									onClick={ handleClickOnRefreshBtn }
+								>
+									Refresh
+									{props.loading && (
+										<CircularProgress
+											size={24}
+											sx={{
+												color: green[500],
+												position: 'absolute',
+												top: '50%',
+												left: '50%',
+												marginTop: '-12px',
+												marginLeft: '-15px',
+											}}
+										/>
+									)}
+								</Button>
+							</Box>
+						</CardActions>
           </Card>
         );
 }
