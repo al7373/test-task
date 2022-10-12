@@ -12,6 +12,10 @@ import Avatar from '@mui/material/Avatar';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import SellIcon from '@mui/icons-material/Sell';
 import PriceCheckIcon from '@mui/icons-material/PriceCheck';
+import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
+import { green } from '@mui/material/colors';
+import Box from '@mui/material/Box';
 
 interface DataToDisplay {
   assetName: string,
@@ -19,10 +23,27 @@ interface DataToDisplay {
   buyPrice: number,
   sellPrice: number,
   spotPrice: number,
-  currency: string
+  currency: string,
+  loading: boolean,
+  onRefresh: Function,
+	success: boolean
 }
 
 export default function Display(props: DataToDisplay) {
+
+    function handleClickOnRefreshBtn(){
+      props.onRefresh();
+    }
+
+		const buttonSx = {
+			...(props.success && {
+				bgcolor: green[500],
+				'&:hover': {
+					bgcolor: green[700],
+				},
+			}),
+		};
+
     return (
           <Card sx={{ maxWidth: 345 }}>
             <CardActionArea>
@@ -64,7 +85,33 @@ export default function Display(props: DataToDisplay) {
                   </List>
               </CardContent>
             </CardActionArea>
+						<Box sx={{ m: 1, position: 'relative', display: 'flex', justifyContent: 'right' }}>
+							<Button
+								variant="contained"
+								sx={buttonSx}
+								disabled={ props.loading }
+								onClick={ handleClickOnRefreshBtn }
+							>
+								Refresh
+								{props.loading && (
+									<CircularProgress
+										size={24}
+										sx={{
+											color: green[500],
+											position: 'absolute',
+											top: '50%',
+											left: '50%',
+											marginTop: '-12px',
+											marginLeft: '-15px',
+										}}
+									/>
+								)}
+							</Button>
+						</Box>
           </Card>
         );
 }
+
+
+
 
