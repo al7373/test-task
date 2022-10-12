@@ -1,18 +1,15 @@
 import React from 'react';
 import Display from '../Display/Display';
 import btcImg from '../assets/bitcoin.jpg';
-import withData from '../utils/withData';
+import withData, { InjectedDataProps } from '../utils/withData';
 
-function BitcoinPrice() {
-    return <Display
-      assetName="bitcoin"
-      assetImg={ btcImg }
-      buyPrice={ 1289 }
-      sellPrice={ 1255.05 }
-      spotPrice={ 1250 }
-      currency="USD"
-    />;
+function BitcoinPrice(props: InjectedDataProps) {
+		return <Display 
+			{ ...props }
+			assetImg={ btcImg }
+			assetName="bitcoin"
+		/>
 }
 
-export default withData(BitcoinPrice)
+export default withData("BTC-USD")(BitcoinPrice);
 

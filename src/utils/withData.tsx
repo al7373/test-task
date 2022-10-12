@@ -1,12 +1,30 @@
 import React from 'react';
-import CircularProgress from '@mui/material/CircularProgress';
+import { Subtract } from 'utility-types';
 
-interface WithLoadingProps {
-  loading: boolean
+export interface InjectedDataProps {
+  buyPrice: number,
+  sellPrice: number,
+  spotPrice: number,
+  currency: string
 }
 
-const withData = <P extends object>(Component: React.ComponentType<P>): React.FC<P & WithLoadingProps> => 
-  ({ loading, ...props }: WithLoadingProps) =>
-  loading ? <CircularProgress /> : <Component {...props as P} />;
+const withData = (pair: string) => <P extends InjectedDataProps>(
+  Component: React.ComponentType<P>
+) =>
+  class WithData extends React.Component<
+    Subtract<P, InjectedDataProps>
+  > {
+    render() {
+      return (
+        <Component
+          {...this.props as P}
+					buyPrice={ 19500 }
+					sellPrice={ 19250 }
+					spotPrice={ 19500 } 
+					currency="USD"
+        />
+      );
+    }
+  };
 
 export default withData
