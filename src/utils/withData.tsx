@@ -1,5 +1,4 @@
 import React from 'react';
-import Display from '../Display/Display';
 import CircularProgress from '@mui/material/CircularProgress';
 
 interface WithLoadingProps {
