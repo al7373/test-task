@@ -4,7 +4,7 @@ import BitcoinPrice from './BitcoinPrice/BitcoinPrice';
 function App() {
   return (
     <div className="App">
-        <BitcoinPrice loading={ false }/>
+        <BitcoinPrice loading={ true }/>
     </div>
   );
 }

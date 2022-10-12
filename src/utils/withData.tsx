@@ -5,13 +5,8 @@ interface WithLoadingProps {
   loading: boolean
 }
 
-const withData = <P extends object>(Component: React.ComponentType<P>) => {
-    return class WithData extends React.Component<P & WithLoadingProps>{
-      render(){
-        const { loading, ...props } = this.props;
-        return loading ? <CircularProgress/> : <Component {...props as P} />;
-      }
-    }
-}
+const withData = <P extends object>(Component: React.ComponentType<P>): React.FC<P & WithLoadingProps> => 
+  ({ loading, ...props }: WithLoadingProps) =>
+  loading ? <CircularProgress /> : <Component {...props as P} />;
 
 export default withData
